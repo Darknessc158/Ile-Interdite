@@ -10,6 +10,26 @@ package ileinterdite;
  * @author polydord
  */
 public class Grille {
-    Tuile grille [][] = new Tuile [6][6];
+    private Tuile grille[][] = new Tuile [6][6];
+    
+    public void setGrille(){
+       
+       //------------------------------------------------------------------------- 
+       grille[1][1] = null;
+       grille[1][2] = null;
+       grille[1][5] = null;
+       grille[1][6] = null;
+       grille[2][1] = null;
+       grille[2][6] = null;
+       grille[5][1] = null;
+       grille[5][6] = null;
+       grille[6][1] = null;
+       grille[6][2] = null;
+       grille[6][5] = null;
+       grille[6][6] = null;     //Mettre la valeur null dans les cases des angles
+       //-------------------------------------------------------------------------
+       
+       for (i)                    // boucle avec conditions "non null" pour les lignes/colonnes
+    }
     
 }
