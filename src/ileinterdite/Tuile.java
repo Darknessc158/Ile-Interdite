@@ -9,7 +9,6 @@ package ileinterdite;
  *
  * @author polydord
  */
-public class Grille {
-    Tuile grille [][] = new Tuile [6][6];
+class Tuile {
     
 }
