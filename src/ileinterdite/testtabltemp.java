@@ -35,7 +35,7 @@ public class testtabltemp {
             
         }
         System.out.println("il y a " + temp.size() + "cases");
-
+System.out.println("il y a " + temp.size() + "cases");
     }
     
 }
