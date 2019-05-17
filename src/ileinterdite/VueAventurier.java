@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import static javax.swing.SwingConstants.CENTER;
 import javax.swing.border.MatteBorder;
-import util.Utils.Pion;
+//import util.Utils.Pion;
 
  
 public class VueAventurier  {
@@ -109,7 +109,7 @@ public class VueAventurier  {
  
      public static void main(String [] args) {
         // Instanciation de la fenêtre 
-        VueAventurier vueAventurier = new VueAventurier("Manon", "Explorateur",Pion.ROUGE.getCouleur() );
+        //VueAventurier vueAventurier = new VueAventurier("Manon", "Explorateur",Pion.ROUGE.getCouleur() );
     }
 }
 
