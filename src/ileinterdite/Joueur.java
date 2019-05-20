@@ -10,10 +10,13 @@ package ileinterdite;
  * @author polydord
  */
 public class Joueur {
-    private String nomJoueur;
+    String nomJoueur;
     private int nbCartes;
     private int actionsRestantes;
     private int nbJoueurs;
+   
+    Joueur[] j = new Joueur[nbJoueurs];
+
     
     Joueur(String nomJoueur, int nbCartes,int actionsRestantes){
         this.nomJoueur = nomJoueur;
@@ -21,10 +24,13 @@ public class Joueur {
         this.actionsRestantes = actionsRestantes;
     }
     
-    private void createJoueurs(int nbJoueurs){
-        for (int i = 1; i < nbJoueurs; i++){
-            Joueur joueur = new Joueur("joueur"+i, 0, 3);
-            
+    private void createJoueur(String nomjoueur){
+        for(int i=1; i<= nbJoueurs; i++){
+                j[i-1] = new Joueur (nomJoueur,0,3);            
         }
+    }
+    
+    private void setNomJoueur(String nomJoueur){
+        this.nomJoueur = nomJoueur;
     }
 }
