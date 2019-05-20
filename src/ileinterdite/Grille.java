@@ -19,6 +19,8 @@ public class Grille {
     int min = 1;
     int max = 24;
     int range = max - min + 1;
+    
+    
 
     //Generation vecteur d'entiers tous differents------------------------------
     public void setTableauTemp() {
