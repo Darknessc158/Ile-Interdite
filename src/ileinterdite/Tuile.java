@@ -5,25 +5,31 @@
  */
 package ileinterdite;
 
+import static ileinterdite.Tuile.Etat.assechée;
+import static ileinterdite.Tuile.Etat.coulée;
+import static ileinterdite.Tuile.Etat.innondé;
+
+
 /**
  *
  * @author polydord
  */
 public class Tuile {
 
+
     //Initialisation Types Enumérés----------------------------------------
     public enum Element {
-        feu, eau, herbe, sable, nul
+        feu, eau, herbe, sable, nulll
     };
 
     public enum Etat {
-        sec, innondé, coulé
+        assechée, innondé, coulée, nullll
     };
     //Declarations---------------------------------------------------------
     public int idtuile;
-    private Etat etat;
-    private Element element;
-    private boolean heliport;
+    public Etat etat;
+    public Element element;
+    public boolean heliport;
 
     //Constructeurs--------------------------------------------------------
     Tuile(int idtuile, Etat etat, Element element, boolean heliport) {
@@ -32,5 +38,19 @@ public class Tuile {
         this.element = element;
         this.heliport = heliport;
     }
+    public void setInnondée(){
+        this.etat = innondé;
+    }
+    public void setAssechee(){
+        this.etat = assechée;
+    }
+    public void setCoulée(){
+        this.etat = coulée;
+    }
+    public Etat getEtat(){
+        return this.etat;
+    }
+    
+    
 
 }

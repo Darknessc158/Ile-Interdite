@@ -33,4 +33,7 @@ public class Joueur {
     private void setNomJoueur(String nomJoueur){
         this.nomJoueur = nomJoueur;
     }
+    private void resetActions(){
+        this.actionsRestantes=0;
+    }
 }

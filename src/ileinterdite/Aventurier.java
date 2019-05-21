@@ -10,6 +10,12 @@ package ileinterdite;
  * @author polydord
  */
 public class Aventurier {
-    public enum Couleur { rouge, bleu, vert, orange, jaune, violet};
+    public enum Pion { rouge, bleu, vert, orange, jaune, violet};
+    private Pion couleurPion;
+    
+    public Pion getCouleur(){
+        return this.couleurPion;
+    }
+    
     
 }
