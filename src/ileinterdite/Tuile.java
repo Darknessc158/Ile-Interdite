@@ -30,13 +30,16 @@ public class Tuile {
     public Etat etat;
     public Element element;
     public boolean heliport;
+    public String nomTuile;
 
     //Constructeurs--------------------------------------------------------
-    Tuile(int idtuile, Etat etat, Element element, boolean heliport) {
+    Tuile(int idtuile,String nomTuile, Etat etat, Element element, boolean heliport) {
         this.idtuile = idtuile;
+        this.nomTuile= nomTuile;
         this.etat = etat;
         this.element = element;
         this.heliport = heliport;
+       
     }
     public void setInnondée(){
         this.etat = innondé;

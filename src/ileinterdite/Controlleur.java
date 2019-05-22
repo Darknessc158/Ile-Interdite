@@ -24,8 +24,9 @@ public class Controlleur {
         System.out.println("------------------------------------");
         System.out.println("On affiche la grille");
         System.out.println("------------------------------------");
+        g.setNomTuiles();
         g.setGrille();
-        g.afficheGrille();
+        g.afficheGrille2();
         System.out.println("------------------------------------");
 
     }
