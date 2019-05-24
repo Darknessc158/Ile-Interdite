@@ -5,17 +5,28 @@
  */
 package ileinterdite;
 
+import static ileinterdite.Aventurier.Pion.rouge;
+
 /**
  *
  * @author polydord
  */
 public class Aventurier {
-    public enum Pion { rouge, bleu, vert, orange, jaune, violet};
-    private Pion couleurPion;
     
-    public Pion getCouleur(){
+
+    public enum Pion {
+        rouge, bleu, vert, orange, jaune, violet
+    };
+    private Pion couleurPion;
+    private int idtuile;
+
+    Aventurier(Pion couleurPion, int idtuile) {
+        this.idtuile = idtuile;
+        this.couleurPion = couleurPion;
+    }
+
+    public Pion getCouleur() {
         return this.couleurPion;
     }
-    
-    
+
 }

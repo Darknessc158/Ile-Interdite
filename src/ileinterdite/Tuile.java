@@ -53,6 +53,14 @@ public class Tuile {
     public Etat getEtat(){
         return this.etat;
     }
+    public int getIdtuile(String nomTuile){
+        if (this.nomTuile == nomTuile){
+            return this.idtuile;
+        }
+        else {
+            return 0;
+            }
+    }
     
     
 

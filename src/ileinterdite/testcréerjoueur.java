@@ -27,7 +27,7 @@ public class testcréerjoueur {
         for (int i = 1; i <= nbJoueurs; i++) {
             System.out.println("Saisir le nom du" + i + "eme joueur :");
             String nomJoueur = entree.next();
-            j[i - 1] = new Joueur(nomJoueur, 0, 3);
+            //j[i - 1] = new Joueur(nomJoueur, 0, 3);
         }
         for (int i = 1; i <= nbJoueurs; i++){
             System.out.println(j[i-1].nomJoueur);

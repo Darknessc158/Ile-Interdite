@@ -27,6 +27,12 @@ public class Grille {
     int range = max - min + 1;
     int k;
     int p;
+    int idtuileRouge;
+    int idtuileHeliport;
+    int idtuileViolet;
+    int idtuileJaune;
+    int idtuileVert;
+    int idtuileOrange;
 
     Grille(Tuile[][] grille) {
         this.grille = grille;
@@ -46,16 +52,16 @@ public class Grille {
 
     public void setNomTuiles() {
         nomDesTuiles.add("Le pont des abimes");
-        nomDesTuiles.add("La porte de bronze");
+        nomDesTuiles.add("La porte de bronze");             //SPAWN PION ROUGE
         nomDesTuiles.add("La caverne des ombres");
-        nomDesTuiles.add("La porte en fer");
-        nomDesTuiles.add("La porte d'Or");
+        nomDesTuiles.add("La porte de fer");                //SPAWN PION VIOLET
+        nomDesTuiles.add("La porte d'or");                  //SPAWN PION JAUNE
         nomDesTuiles.add("Les falaises de l'oubli");
         nomDesTuiles.add("Le palais de corail");
-        nomDesTuiles.add("La porte d'argent");
+        nomDesTuiles.add("La porte d'argent");//SPAWN PION ORANGE
         nomDesTuiles.add("Les dunes de l'illusion");
-        nomDesTuiles.add("Heliport");
-        nomDesTuiles.add("La porte de cuivre");
+        nomDesTuiles.add("Heliport");                       //SPAWN PION BLEU
+        nomDesTuiles.add("La porte de cuivre");             //SPAWN PION VERT
         nomDesTuiles.add("Le jardin des hurlements");
         nomDesTuiles.add("La foret pourpre");
         nomDesTuiles.add("Le lagon perdu");
@@ -69,7 +75,6 @@ public class Grille {
         nomDesTuiles.add("Le val du crepuscule");
         nomDesTuiles.add("La tour de guet");
         nomDesTuiles.add("Le jardin des murmures");
-        Collections.shuffle(nomDesTuiles);
 
     }
 
@@ -93,10 +98,47 @@ public class Grille {
         for (int i = 0; i < 6; i++) {                       // boucle avec conditions "non null" pour les lignes/colonnes
             for (int j = 0; j < 6; j++) {
                 if (grille[i][j] != tuilenull) {                    // boucle pour parcourir le tableau
-                    grille[i][j] = new Tuile(temp.get(k++), nomDesTuiles.get(p++), nullll, nulll, false); // ajout d'une case aléatoire à la grille
+                    grille[i][j] = new Tuile(temp.get(k++), nomDesTuiles.get(p++), nullll, nulll, false);
+                    if (nomDesTuiles.get(p) == "La porte de bronze") {
+                        idtuileRouge = temp.get(k);
+                    } else if (nomDesTuiles.get(p) == "Heliport") {
+                        idtuileHeliport = temp.get(k);
+                    } else if (nomDesTuiles.get(p) == "La porte de fer") {
+                        idtuileViolet = temp.get(k);
+                    } else if (nomDesTuiles.get(p) == "La porte de cuivre") {
+                        idtuileVert = temp.get(k);
+                    } else if (nomDesTuiles.get(p) == "La porte d'argent") {
+                        idtuileOrange = temp.get(k);
+                    } else if (nomDesTuiles.get(p) == "La porte d'or") {
+                        idtuileJaune = temp.get(k);
+                    }
                 }
             }
         }
+    }
+
+    public int getidtuileRouge() {
+        return idtuileRouge;
+    }
+
+    public int getidtuileVert() {
+        return idtuileVert;
+    }
+
+    public int getidtuileViolet() {
+        return idtuileViolet;
+    }
+
+    public int getidtuileJaune() {
+        return idtuileJaune;
+    }
+
+    public int getidtuileOrange() {
+        return idtuileOrange;
+    }
+
+    public int getidtuileHeliport() {
+        return idtuileHeliport;
     }
 
     public void afficheGrille() {
@@ -112,10 +154,9 @@ public class Grille {
     public void afficheGrille2() {
         for (int i = 0; i < 6; i++) {                       // boucle avec conditions "non null" pour les lignes/colonnes
             for (int j = 0; j < 6; j++) {
-                if(grille[i][j]==tuilenull){
+                if (grille[i][j] == tuilenull) {
                     System.out.print("| X");
-                }
-                else if (grille[i][j].idtuile < 10) {
+                } else if (grille[i][j].idtuile < 10) {
                     System.out.print("| " + grille[i][j].idtuile);
                 } else {
                     System.out.print("|" + grille[i][j].idtuile);

@@ -5,6 +5,10 @@
  */
 package ileinterdite;
 
+import ileinterdite.Aventurier.Pion;
+import java.util.ArrayList;
+import java.util.Collections;
+
 /**
  *
  * @author polydord
@@ -13,22 +17,17 @@ public class Joueur {
     String nomJoueur;
     private int nbCartes;
     private int actionsRestantes;
-    private int nbJoueurs;
-   
-    Joueur[] j = new Joueur[nbJoueurs];
+
+ 
 
     
-    Joueur(String nomJoueur, int nbCartes,int actionsRestantes){
+    Joueur(String nomJoueur, int nbCartes,int actionsRestantes, Aventurier aventurier){
         this.nomJoueur = nomJoueur;
         this.nbCartes = nbCartes;
         this.actionsRestantes = actionsRestantes;
     }
     
-    private void createJoueur(String nomjoueur){
-        for(int i=1; i<= nbJoueurs; i++){
-                j[i-1] = new Joueur (nomJoueur,0,3);            
-        }
-    }
+
     
     private void setNomJoueur(String nomJoueur){
         this.nomJoueur = nomJoueur;
