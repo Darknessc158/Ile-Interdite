@@ -117,6 +117,7 @@ public class Grille {
         }
     }
 
+    
     public int getidtuileRouge() {
         return idtuileRouge;
     }
