@@ -40,14 +40,15 @@ public class Controlleur {
         Grille g = new Grille(grille);
         int nbJoueurs;
         //Initialisation de la grille-----------------------------------------------
-        g.setTableauTemp();
+       // g.setTableauTemp();
         System.out.println("On affiche le tableau");
         System.out.println("------------------------------------");
-        g.afficheTab();
+        //g.afficheTab();
         System.out.println("------------------------------------");
         System.out.println("On affiche la grille");
         System.out.println("------------------------------------");
         g.setNomTuiles();
+                g.creerTuiles();
         g.setGrille();
         g.afficheGrille2();
         System.out.println("------------------------------------");
@@ -56,11 +57,14 @@ public class Controlleur {
         System.out.println("Nb joueurs ?");
         System.out.println("Saisir un entier :");
         nbJoueurs = entree.nextInt();
+        
 
+        
         for (int i = 1; i <= nbJoueurs; i++) {
             System.out.println("Saisir le nom du" + i + "eme joueur :");
             String nomJoueur = entree.next();
             controlleur.createJoueur(nomJoueur);
+          
 
             /*System.out.println("Quelle couleur de pion ?");
             String couleurJoueur = entree.next();

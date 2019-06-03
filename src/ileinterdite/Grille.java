@@ -5,11 +5,11 @@
  */
 package ileinterdite;
 
-import static ileinterdite.Tuile.Element.nulll;
-import static ileinterdite.Tuile.Etat.nullll;
+import static ileinterdite.Tuile.Etat.assechée;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.ListIterator;
 
 /**
  *
@@ -18,7 +18,7 @@ import java.util.Collections;
 public class Grille {
 
     //Declarations--------------------------------------------------------------
-    public Tuile tuilenull = new Tuile(0, "NaN", nullll, nulll, false);
+    public Tuile tuilenull = new Tuile(0, "NaN", null);
     public Tuile grille[][] = new Tuile[6][6];
     ArrayList<String> nomDesTuiles = new ArrayList<>();
     ArrayList<Integer> temp = new ArrayList<>();
@@ -27,19 +27,21 @@ public class Grille {
     int range = max - min + 1;
     int k;
     int p;
-    int idtuileRouge;
-    int idtuileHeliport;
-    int idtuileViolet;
-    int idtuileJaune;
-    int idtuileVert;
-    int idtuileOrange;
+   // int idtuileRouge;
+   // int idtuileHeliport;
+   // int idtuileViolet;
+   // int idtuileJaune;
+   // int idtuileVert;
+   // int idtuileOrange;
+    
+    ArrayList<Tuile> TuilesValides = new ArrayList<>();
 
     Grille(Tuile[][] grille) {
         this.grille = grille;
     }
 
     //Generation vecteur d'entiers tous differents------------------------------
-    public void setTableauTemp() {
+    /**public void setTableauTemp() {
         for (int i = 1; i < 25; i++) {
             int rand = (int) (Math.random() * range) + min;
             if (temp.contains(rand) == false) {
@@ -48,7 +50,7 @@ public class Grille {
                 i--;
             }
         }
-    }
+    }**/
 
     public void setNomTuiles() {
         nomDesTuiles.add("Le pont des abimes");
@@ -58,7 +60,7 @@ public class Grille {
         nomDesTuiles.add("La porte d'or");                  //SPAWN PION JAUNE
         nomDesTuiles.add("Les falaises de l'oubli");
         nomDesTuiles.add("Le palais de corail");
-        nomDesTuiles.add("La porte d'argent");//SPAWN PION ORANGE
+        nomDesTuiles.add("La porte d'argent");               //SPAWN PION ORANGE
         nomDesTuiles.add("Les dunes de l'illusion");
         nomDesTuiles.add("Heliport");                       //SPAWN PION BLEU
         nomDesTuiles.add("La porte de cuivre");             //SPAWN PION VERT
@@ -77,6 +79,15 @@ public class Grille {
         nomDesTuiles.add("Le jardin des murmures");
 
     }
+    
+    public void creerTuiles(){
+        Tuile tuile;
+        for (int i = 0; i <= 23; i++){
+            tuile = new Tuile(i, nomDesTuiles.get(i), assechée);
+            TuilesValides.add(tuile);
+        }
+        Collections.shuffle(TuilesValides);
+    }
 
     public void setGrille() {
         //Mettre null dans les cases non-jouables-------------------------------
@@ -94,54 +105,23 @@ public class Grille {
         grille[5][4] = tuilenull;
         grille[5][5] = tuilenull;
 
+        
         //Code de setGrille()---------------------------------------------------
+        int k =0;
         for (int i = 0; i < 6; i++) {                       // boucle avec conditions "non null" pour les lignes/colonnes
             for (int j = 0; j < 6; j++) {
                 if (grille[i][j] != tuilenull) {                    // boucle pour parcourir le tableau
-                    grille[i][j] = new Tuile(temp.get(k++), nomDesTuiles.get(p++), nullll, nulll, false);
-                    if (nomDesTuiles.get(p) == "La porte de bronze") {
-                        idtuileRouge = temp.get(k);
-                    } else if (nomDesTuiles.get(p) == "Heliport") {
-                        idtuileHeliport = temp.get(k);
-                    } else if (nomDesTuiles.get(p) == "La porte de fer") {
-                        idtuileViolet = temp.get(k);
-                    } else if (nomDesTuiles.get(p) == "La porte de cuivre") {
-                        idtuileVert = temp.get(k);
-                    } else if (nomDesTuiles.get(p) == "La porte d'argent") {
-                        idtuileOrange = temp.get(k);
-                    } else if (nomDesTuiles.get(p) == "La porte d'or") {
-                        idtuileJaune = temp.get(k);
-                    }
+                    grille[i][j] = TuilesValides.get(k);
+                    k ++;
+                   
                 }
             }
         }
     }
 
+   
     
-    public int getidtuileRouge() {
-        return idtuileRouge;
-    }
-
-    public int getidtuileVert() {
-        return idtuileVert;
-    }
-
-    public int getidtuileViolet() {
-        return idtuileViolet;
-    }
-
-    public int getidtuileJaune() {
-        return idtuileJaune;
-    }
-
-    public int getidtuileOrange() {
-        return idtuileOrange;
-    }
-
-    public int getidtuileHeliport() {
-        return idtuileHeliport;
-    }
-
+    
     public void afficheGrille() {
         for (int i = 0; i < 6; i++) {                       // boucle avec conditions "non null" pour les lignes/colonnes
             for (int j = 0; j < 6; j++) {
@@ -167,10 +147,4 @@ public class Grille {
         }
     }
 
-    public void afficheTab() {
-        for (int i = 0; i < temp.size(); i++) {
-            System.out.println(temp.get(i));
-
-        }
-    }
 }
