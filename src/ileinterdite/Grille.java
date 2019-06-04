@@ -5,53 +5,35 @@
  */
 package ileinterdite;
 
-import static ileinterdite.Tuile.Etat.assechée;
+//import static ileinterdite.Tuile.Etat.assechée;
+import static IleInterdite.Utils.EtatTuile.ASSECHEE;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.ListIterator;
 
-/**
- *
- * @author polydord
- */
+
 public class Grille {
 
     //Declarations--------------------------------------------------------------
     public Tuile tuilenull = new Tuile(0, "NaN", null);
     public Tuile grille[][] = new Tuile[6][6];
-    ArrayList<String> nomDesTuiles = new ArrayList<>();
-    ArrayList<Integer> temp = new ArrayList<>();
-    int min = 1;
-    int max = 24;
-    int range = max - min + 1;
-    int k;
-    int p;
-   // int idtuileRouge;
-   // int idtuileHeliport;
-   // int idtuileViolet;
-   // int idtuileJaune;
-   // int idtuileVert;
-   // int idtuileOrange;
     
+ 
+    ArrayList<String> nomDesTuiles = new ArrayList<>();
+    ArrayList<Tuile> TuilesTresor = new ArrayList<>();
     ArrayList<Tuile> TuilesValides = new ArrayList<>();
+    
+    
+    
+    private final String[] nomTuilesTresor = {"Le temple de la lune", "Le temple du soleil", "Le jardin des murmures", "Le jardin des hurlements",
+                                     "La caverne du brasier", "La caverne des ombres", "Le palais des marées", "Le palais de corail"};
 
     Grille(Tuile[][] grille) {
         this.grille = grille;
     }
 
-    //Generation vecteur d'entiers tous differents------------------------------
-    /**public void setTableauTemp() {
-        for (int i = 1; i < 25; i++) {
-            int rand = (int) (Math.random() * range) + min;
-            if (temp.contains(rand) == false) {
-                temp.add(rand);
-            } else {
-                i--;
-            }
-        }
-    }**/
-
+    //AJOUT DU NOM DE TOUTES LES TUILES A L'ARRAYLIST NOMDESTUILES
     public void setNomTuiles() {
         nomDesTuiles.add("Le pont des abimes");
         nomDesTuiles.add("La porte de bronze");             //SPAWN PION ROUGE
@@ -73,18 +55,22 @@ public class Grille {
         nomDesTuiles.add("La caverne du brasier");
         nomDesTuiles.add("Le temple du soleil");
         nomDesTuiles.add("Le temple de la lune");
-        nomDesTuiles.add("Le palais des maress");
+        nomDesTuiles.add("Le palais des marées");
         nomDesTuiles.add("Le val du crepuscule");
         nomDesTuiles.add("La tour de guet");
         nomDesTuiles.add("Le jardin des murmures");
 
     }
-    
-    public void creerTuiles(){
+    //CREATION DE L'ARRAYLIST AVEC TOUTES LES TUILES SUR LEQUEL LE JOUEUR PEUX SE DEPLACER
+    public void creerTuiles() {
         Tuile tuile;
-        for (int i = 0; i <= 23; i++){
-            tuile = new Tuile(i, nomDesTuiles.get(i), assechée);
+        for (int i = 0; i <= 23; i++) {
+            tuile = new Tuile(i, nomDesTuiles.get(i), ASSECHEE);
             TuilesValides.add(tuile);
+            
+            if (Arrays.asList(nomTuilesTresor).contains(nomDesTuiles.get(i))){
+               TuilesTresor.add(tuile);
+            }  
         }
         Collections.shuffle(TuilesValides);
     }
@@ -105,28 +91,13 @@ public class Grille {
         grille[5][4] = tuilenull;
         grille[5][5] = tuilenull;
 
-        
         //Code de setGrille()---------------------------------------------------
-        int k =0;
+        int k = 0;
         for (int i = 0; i < 6; i++) {                       // boucle avec conditions "non null" pour les lignes/colonnes
             for (int j = 0; j < 6; j++) {
                 if (grille[i][j] != tuilenull) {                    // boucle pour parcourir le tableau
                     grille[i][j] = TuilesValides.get(k);
-                    k ++;
-                   
-                }
-            }
-        }
-    }
-
-   
-    
-    
-    public void afficheGrille() {
-        for (int i = 0; i < 6; i++) {                       // boucle avec conditions "non null" pour les lignes/colonnes
-            for (int j = 0; j < 6; j++) {
-                if (grille[i][j] != tuilenull) {
-                    System.out.println(grille[i][j].nomTuile + " = tuile numero : " + grille[i][j].idtuile);
+                    k++;
                 }
             }
         }
@@ -146,5 +117,15 @@ public class Grille {
             System.out.println("|");
         }
     }
+    
+        
+    
+    // TEST POUR VERIFIER LA LISTE DES TUILES   A SUPPRIMER
+    public void afficherTuilesTresor(){
+            for (int i=0; i< TuilesTresor.size(); i++){
+                System.out.println(TuilesTresor.get(i).getNomTuile());
+            }
+            }
+
 
 }

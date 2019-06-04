@@ -13,7 +13,8 @@ import static ileinterdite.Aventurier.Pion.rouge;
  */
 public class Aventurier {
     
-
+    //private String[] PionDeCouleur {rouge, bleu, vert, orange, jaune, violet};
+    
     public enum Pion {
         rouge, bleu, vert, orange, jaune, violet
     };
@@ -24,9 +25,14 @@ public class Aventurier {
         this.idtuile = idtuile;
         this.couleurPion = couleurPion;
     }
-
-    public Pion getCouleur() {
-        return this.couleurPion;
+    
+    public Pion getCouleurPion() {
+        return couleurPion;
     }
 
+    public int getIdtuile() {
+        return idtuile;
+    }
+
+    //public void 
 }

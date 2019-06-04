@@ -5,14 +5,31 @@
  */
 package ileinterdite;
 
-/**
- *
- * @author amegliol
- */
 public class Tresor {
-   
-    //public String nomTresor
-    
+
+    private final String[] nomTresor = {"Le Cristal ardent", "La Pierre sacrée", "La Statue du zéphyr", "Le Calice de l’onde"};
+    private int i;
+    private boolean dispo;
+
     //Constructeur
-    
+    Tresor(String nomTresor, boolean dispo) {
+        this.nomTresor[i] = nomTresor;
+        this.dispo = dispo;
+    }
+
+    public String[] getNomTresor() {
+        return nomTresor;
+    }
+
+    public boolean estDisponible() {
+        return dispo;
+    }
+
+    private void CreerTresor() {
+        Tresor tresor;
+        for (i = 0; i < 4; i++) {
+            tresor = new Tresor(nomTresor[i], true);
+        }
+
+    }
 }

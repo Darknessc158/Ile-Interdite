@@ -5,20 +5,11 @@
  */
 package ileinterdite;
 
-import ileinterdite.Aventurier.Pion;
-import java.util.ArrayList;
-import java.util.Collections;
 
-/**
- *
- * @author polydord
- */
 public class Joueur {
     String nomJoueur;
     private int nbCartes;
     private int actionsRestantes;
-
- 
 
     
     Joueur(String nomJoueur, int nbCartes,int actionsRestantes, Aventurier aventurier){
