@@ -1,4 +1,4 @@
-package IleInterdite;
+package ileinterdite;
 
 import ileinterdite.Parameters;
 import java.awt.Color;

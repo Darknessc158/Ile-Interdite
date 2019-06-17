@@ -16,7 +16,7 @@ public abstract class Cartes {
     }
 
     public void setNomCarte(String nomCarte) {
-        this.nomCarte = nomCarte;// PAS DE SETTER ICI , NOM DES CARTES A DEFINIR POUR CHAQUE SOUS CLASSE
+        this.nomCarte = nomCarte;
     }
     
     
