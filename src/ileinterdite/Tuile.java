@@ -5,21 +5,20 @@
  */
 package ileinterdite;
 
-import static ileinterdite.Tuile.Etat.assechée;
-import static ileinterdite.Tuile.Etat.coulée;
-import static ileinterdite.Tuile.Etat.innondé;
+import static ileinterdite.Tuile.Etat.*;
 import java.util.ArrayList;
-
 
 public class Tuile {
 
-    
     public int idtuile;
     public Etat etat;
-    public boolean heliport;
     public String nomTuile;
-    private ArrayList<Tuile> TuilesTresor;
-    private ArrayList<Tuile> TuilesSpawn;
+
+    Tuile(int idtuile, String nomTuile, Etat etat) {
+        this.idtuile = idtuile;
+        this.nomTuile = nomTuile;
+        this.etat = etat;
+    }
 
     public enum Etat {
         assechée, innondé, coulée
@@ -30,51 +29,32 @@ public class Tuile {
     }
 
     public boolean isHeliport() {
-        return heliport;
+        return this.nomTuile.equalsIgnoreCase("Heliport");
     }
 
     public String getNomTuile() {
         return nomTuile;
     }
-       
-    public Etat getEtat(){
+
+    public Etat getEtat() {
         return this.etat;
     }
 
     //Constructeur--------------------------------------------------------
-    Tuile(int idtuile,String nomTuile, Etat etat) {
-        this.idtuile = idtuile;
-        this.nomTuile= nomTuile;
-        this.etat = etat;
+    public void setInnondée() {
+        this.etat = innondé;
     }
-    
-    public void setInnondée(){
-    this.etat = innondé;
-    }
-    
-    public void setAssechee(){
+
+    public void setAssechee() {
         this.etat = assechée;
     }
-    
-    public void setCoulée(){
+
+    public void setCoulée() {
         this.etat = coulée;
     }
-    
-    private String[] nomTuilesTresor = {"Le temple de la lune", "Le temple du soleil", "Le jardin des murmures", "Le jardin des hurlements",
-                                     "La caverne du brasier", "La caverne des ombres", "Le palais des marées", "Le palais de corail"};
-    
-    /**public String TresorTuile(Tuile tu){
-        if (tu.nomTuile == "Le temple de la lune" || tu.nomTuile == "Le temple du soleil"){
-            return "La Pierre sacrée";// retourner l'objet trésor associé a la pierre ?
-        }else if (tu.nomTuile == "Le jardin des murmures" || tu.nomTuile == "Le jardin des hurlements"){
-            return "La Statue du zéphyr";
-        }else if (tu.nomTuile == "La caverne du brasier" || tu.nomTuile == "La caverne des ombres"){
-            return "Le Cristal ardent";
-        }else if (tu.nomTuile == "Le palais des marées" || tu.nomTuile == "Le palais de corail"){
-            return "Le Calice de l’onde";
-        }else return "Aucun trésor";
-    }**/
-    
-    
-    
+
+//    private String[] nomTuilesTresor = {"Le temple de la lune", "Le temple du soleil", "Le jardin des murmures", "Le jardin des hurlements",
+//        "La caverne du brasier", "La caverne des ombres", "Le palais des marées", "Le palais de corail"};
+
+
 }

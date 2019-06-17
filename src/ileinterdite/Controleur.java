@@ -14,24 +14,33 @@ import java.util.Scanner;
  *
  * @author polydord
  */
-public class Controlleur implements Observateur {
+public class Controleur implements Observateur {
 
     private int niveauEau;
-    private Grille grille = new Grille();
-    //private final String[] couleur = {"Rouge", "Vert", "Bleu", "Orange", "Jaune", "Violet"};
-    private GrilleDeJeu ihm;
+    private Grille grille;
+    private IHM ihm;
     private ArrayList<Aventurier> LesAventuriers = new ArrayList<>();
+    private int actionRestantes;
 
-    Controlleur(GrilleDeJeu ihm) {
-        this.ihm = ihm;
+    Controleur() {
+        grille = new Grille();
+        ihm = new IHM();
         ihm.addObservateur(this);
+        //grille.afficherGrille();    // JUSTE POUR TESTER GRILLE 
+        ihm.initialisationBoutons();
+        ihm.appelleMap();
+        ihm.afficher();
+    }
+
+    public Grille getGrille() {
+        return grille;
+    }
+
+    public ArrayList<Aventurier> getLesAventuriers() {
+        return LesAventuriers;
     }
     
-    public void TourDeJeu(){
-        
-    }
-    
-    
+
     public void InitAventurier() {
         Tuile tuile;
         Aventurier Ingénieur = new Aventurier("Rouge", 0);
@@ -58,6 +67,7 @@ public class Controlleur implements Observateur {
     public void CréerJoueurs() {
         Scanner sc = new Scanner(System.in);
         int nbjoueurs = 0;
+        Joueur joueur;
 
         while (!(nbjoueurs < 5 && nbjoueurs > 1)) {
             System.out.println("Nombre de joueurs ? (de 2 à 4 joueurs) : ");
@@ -67,47 +77,51 @@ public class Controlleur implements Observateur {
                 System.out.print("/n Nom du joueur n°" + i + " : ");
                 String nomjoueur = sc.nextLine();
 
-                Joueur joueur;
-                joueur = new Joueur(nomjoueur, 0, 0, LesAventuriers.get(i));
+                joueur = new Joueur(nomjoueur, 0, 0, getLesAventuriers().get(i));
             }
             System.out.println("Enregistrement des joueurs terminés !");
         }
 
     }
-
-    public Grille getGrille() {
-        return grille;
-    }
-
-    public static void main(String[] args) {
-
-        GrilleDeJeu ihm = new GrilleDeJeu();
-        Controlleur appli = new Controlleur(ihm);
-        appli.getGrille().afficheGrille2();
-        ihm.initialisationBoutons();
-        ihm.appelleMap();
-
+    
+    public void TourDeJeu(Joueur joueur){
+        this.actionRestantes = 4;
+        
+        while (actionRestantes > 0){
+            
+        }
+        
     }
 
     @Override
     public void traiterMessage(Message m) {
+
         switch (m.typeMessage) {
             case INITIALISATION_MAP:
-                this.ihm.initialisationMap(this.getGrille().GrilleDeTuiles);
+                this.ihm.initialisationMap(this.getGrille().getGrilleDeTuiles());
+                
                 break;
             case ASSECHER:
-                this.ihm.afficheAssechables(this.getGrille().GrilleDeTuiles, 5);
+                this.ihm.afficheAssechables(this.getGrille().getGrilleDeTuiles(), 5);
+                
                 //méthode pour afficher les cases asséchables
                 break;
             case DEPLACER:
+
                 //méthode pour afficher la case sur laquelle le joueur peux aller
                 //méthode pour actualiser la case avec le joueur
                 break;
             case FIN_TOUR:
                 //méthode pour terminer le tour actuel
-                //commender tour du joueur suivant
+                //commencer tour du joueur suivant
                 break;
         }
+    }
+
+    public static void main(String[] args) {
+
+        Controleur appli = new Controleur();
+
     }
 
 }

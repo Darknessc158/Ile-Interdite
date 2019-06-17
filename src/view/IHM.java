@@ -22,9 +22,9 @@ import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import static view.TypeMessage.*;
 
-public class GrilleDeJeu extends Observe {
+public class IHM extends Observe {
 
-    private final JFrame window;
+    private final JFrame fenetre;
     private JPanel mainPanel;
     private JPanel grillePanel;
     private JPanel panelBoutons;
@@ -32,26 +32,39 @@ public class GrilleDeJeu extends Observe {
     private JButton[][] grillebouton;
     private JPanel panelAventurier;
 
-    public GrilleDeJeu() {
-        window = new JFrame();
-        window.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-        //Définit taille de la fenetre en pixels
-        window.setSize(800, 800);
-
+    public IHM() {
+        fenetre = new JFrame();
+ 
         mainPanel = new JPanel(new BorderLayout());
         panelBoutons = new JPanel(new GridLayout(5, 0));
         panelAventurier = new JPanel(new GridLayout(0, 5));
         grillePanel = new JPanel(new GridLayout(6, 6));
 
-        window.setVisible(true);
-
         mainPanel.add(grillePanel, BorderLayout.CENTER);
         mainPanel.add(panelBoutons, BorderLayout.EAST);
         mainPanel.add(panelAventurier, BorderLayout.WEST);
-        window.add(mainPanel);
+        fenetre.add(mainPanel);
 
     }
+    
+    public void afficher(){
+        fenetre.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+        fenetre.setSize(800, 800);
+        fenetre.setVisible(true);
+    }
 
+    public JButton[][] getGrillebouton() {
+        return grillebouton;
+    }
+
+    public JPanel getGrillePanel() {
+        return grillePanel;
+    }
+    
+    
+    
+    
+    
     public void initialisationVueAventurier() {
 
         JToggleButton vueP1 = new JToggleButton();
@@ -162,36 +175,36 @@ public class GrilleDeJeu extends Observe {
             for (int j = 0; j < 6; j++) {
                 t = tuiles[i][j];
                 if (t.getNomTuile().equalsIgnoreCase("tuillenulle")) {
-                    grillebouton[i][j] = new JButton();
-                    grillebouton[i][j].setBackground(Color.cyan);
+                    getGrillebouton()[i][j] = new JButton();
+                    getGrillebouton()[i][j].setBackground(Color.cyan);
 
-                    grillebouton[i][j].setEnabled(false);
+                    getGrillebouton()[i][j].setEnabled(false);
                 } else {
-                    grillebouton[i][j] = new JButton(t.getNomTuile());
-                    grillebouton[i][j].setForeground(Color.WHITE);
+                    getGrillebouton()[i][j] = new JButton(t.getNomTuile());
+                    getGrillebouton()[i][j].setForeground(Color.WHITE);
                     if (i == 0 & j == 3) {
-                        grillebouton[i][j].setBackground(Color.RED);
+                        getGrillebouton()[i][j].setBackground(Color.RED);
                     } else if (i == 1 & j == 3){
-                    grillebouton[i][j].setBackground(Color.YELLOW);
+                    getGrillebouton()[i][j].setBackground(Color.YELLOW);
                     
                     }else if (i == 2 & j == 3){
-                    grillebouton[i][j].setBackground(Color.BLUE);
+                    getGrillebouton()[i][j].setBackground(Color.BLUE);
                     
                     }else if (i == 1 & j == 2){
-                    grillebouton[i][j].setBackground(Color.BLACK);
+                    getGrillebouton()[i][j].setBackground(Color.BLACK);
                     
                     }else if (i == 2 & j == 4){
-                    grillebouton[i][j].setBackground(Color.GREEN);
+                    getGrillebouton()[i][j].setBackground(Color.GREEN);
                     
                     }else if (i == 2 & j == 1){
-                    grillebouton[i][j].setBackground(Color.ORANGE);
+                    getGrillebouton()[i][j].setBackground(Color.ORANGE);
                     
                     }else {
-                        grillebouton[i][j].setBackground(Color.DARK_GRAY);
+                        getGrillebouton()[i][j].setBackground(Color.DARK_GRAY);
                     }
 
                 }
-                this.grillePanel.add(grillebouton[i][j]);
+                this.getGrillePanel().add(this.getGrillebouton()[i][j]);
             }
         }
     }

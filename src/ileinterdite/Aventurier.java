@@ -15,6 +15,9 @@ public class Aventurier {
 
     private int idtuile;
     Grille grille;
+    public ArrayList<Tuile> TuilesAssechables;
+    public ArrayList<Tuile> TuilesDispos;
+    private Pion CouleurPion;
 
     public static enum Pion {
         ROUGE("Rouge", new Color(255, 0, 0)),
@@ -64,8 +67,6 @@ public class Aventurier {
         }
     }
 
-    private Pion CouleurPion;
-
     Aventurier(String couleur, int idtuile) {
         this.idtuile = idtuile;
         this.CouleurPion = getFromName(couleur);
@@ -79,11 +80,31 @@ public class Aventurier {
         return idtuile;
     }
 
+    public ArrayList<Tuile> getTuilesAssechables() {
+        return TuilesAssechables;
+    }
+
+    public void setTuilesAssechables(ArrayList<Tuile> TuilesAssechables) {
+        this.TuilesAssechables = TuilesAssechables;
+    }
+
+    public ArrayList<Tuile> getTuilesDispo() {
+        return TuilesDispos;
+    }
+
+    public void setTuilesDispo(ArrayList<Tuile> TuilesDispo) {
+        this.TuilesDispos = TuilesDispo;
+    }
+
+    public ArrayList<Tuile> getTuilesDispos() {
+        return TuilesDispos;
+    }
+
     public int[] getPosition(Grille grille, int idtuile) {
         int[] position = new int[2];
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
-                if (grille.GrilleDeTuiles[i][j].idtuile == idtuile) {
+                if (grille.getGrilleDeTuiles()[i][j].idtuile == idtuile) {
                     position[0] = j;
                     position[1] = i;
                     break;
@@ -101,60 +122,59 @@ public class Aventurier {
         if (j != 0) {        //On vérifie si la tuile du dessus existe
             j = j - 1;        //On se place sur la tuile au dessus
 
-            if (grille.GrilleDeTuiles[i][j].nomTuile != "tuilenulle") {
-                TuilesAdjacentes.add(grille.GrilleDeTuiles[i][j]);
+            if (grille.getGrilleDeTuiles()[i][j].nomTuile != "tuilenulle") {
+                TuilesAdjacentes.add(grille.getGrilleDeTuiles()[i][j]);
             }
         }
         j = getPosition(grille, idtuile)[0];
         if (j != 5) {        //On vérifie si la tuile du dessous existe
             j = j + 1;        //On se place sur la tuile au dessous
 
-            if (grille.GrilleDeTuiles[i][j].nomTuile != "tuilenulle") {
-                TuilesAdjacentes.add(grille.GrilleDeTuiles[i][j]);
+            if (grille.getGrilleDeTuiles()[i][j].nomTuile != "tuilenulle") {
+                TuilesAdjacentes.add(grille.getGrilleDeTuiles()[i][j]);
             }
         }
         j = getPosition(grille, idtuile)[0];
         if (i != 0) {
             i = i - 1;//on se place sur la tuile de gauche
-            if (grille.GrilleDeTuiles[i][j].nomTuile != "tuilenulle") {
-                TuilesAdjacentes.add(grille.GrilleDeTuiles[i][j]);
+            if (grille.getGrilleDeTuiles()[i][j].nomTuile != "tuilenulle") {
+                TuilesAdjacentes.add(grille.getGrilleDeTuiles()[i][j]);
             }
         }
         i = getPosition(grille, idtuile)[1];
         if (i != 5) {
             i = i + 1;    //on se place sur la tuile de droite        
-            if (grille.GrilleDeTuiles[i][j].nomTuile != "tuilenulle") {
-                TuilesAdjacentes.add(grille.GrilleDeTuiles[i][j]);
+            if (grille.getGrilleDeTuiles()[i][j].nomTuile != "tuilenulle") {
+                TuilesAdjacentes.add(grille.getGrilleDeTuiles()[i][j]);
             }
         }
         return TuilesAdjacentes;
     }
 
     public ArrayList<Tuile> TuilesAssechables(int idtuile) {
-        ArrayList<Tuile> tuilesAssechables = new ArrayList<>();
-        ArrayList<Tuile> tempAdjacentes = TuilesAdjacentes(idtuile);
-        for (int i = 0; i <= tempAdjacentes.size(); i++) {
-            if (tempAdjacentes.get(i).getEtat() == innondé) {
-                tuilesAssechables.add(tempAdjacentes.get(i));
-            }
-
-        }
-        return tuilesAssechables;
-    }
-
-    public ArrayList<Tuile> TuilesDispo(int idtuile) {
-        ArrayList<Tuile> tuilesDispos = new ArrayList<>();
-        ArrayList<Tuile> tempAdjacentes = TuilesAdjacentes(idtuile);
-        for (int i = 0; i <= tempAdjacentes.size(); i++) {
-            if (tempAdjacentes.get(i).getEtat() != coulée) {
-                tuilesDispos.add(tempAdjacentes.get(i));
+        TuilesAssechables = TuilesAdjacentes(idtuile);
+        for (Tuile tuile : this.getTuilesAssechables()) {
+            if (tuile.getEtat().equals(innondé)) {
+                TuilesAssechables.remove(tuile);
             }
         }
-        return tuilesDispos;
+        return TuilesAssechables;
     }
 
-    public void deplacerAventurier(int idtuile) {
+    public ArrayList<Tuile> TuilesDispos(int idtuile) {
+        TuilesDispos = TuilesAdjacentes(idtuile);
+        for (Tuile tuile : this.getTuilesDispos()) {
+            if (tuile.getEtat().equals(coulée)) {
+                TuilesDispos.remove(tuile);
+            }
+        }
+        return TuilesDispos;
+    }
 
+    public void deplacerAventurier(Aventurier aventurier) {
+        TuilesDispos = TuilesDispos(this.idtuile);
+        
+        
     }
 
 }
