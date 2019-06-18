@@ -30,8 +30,6 @@ public class Joueur {
     public ArrayList<Carte> getCarteJoueur() {
         return CarteJoueur;
     }
-
-    
     
     public int getActionsRestantes() {
         return actionsRestantes;
@@ -46,6 +44,9 @@ public class Joueur {
         this.actionsRestantes = actionsRestantes;
     }
     
+    public boolean inventairePlein(){
+        return this.getCarteJoueur().size()<5;
+    }
   
 
 }
