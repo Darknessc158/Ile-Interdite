@@ -5,31 +5,41 @@
  */
 package ileinterdite;
 
+import java.util.ArrayList;
+
 public class Tresor {
 
-    private final String[] nomTresor = {"Le Cristal ardent", "La Pierre sacrée", "La Statue du zéphyr", "Le Calice de l’onde"};
-    private int i;
-    private boolean dispo;
+    private String nomTresor;
+    private ArrayList<Tresor> lesTresors;
 
-    //Constructeur
-    Tresor(String nomTresor, boolean dispo) {
-        this.nomTresor[i] = nomTresor;
-        this.dispo = dispo;
+    Tresor() {
+        initTresor();
     }
 
-    public String[] getNomTresor() {
+    Tresor(String nomTresor) {
+        this.nomTresor = nomTresor;
+    }
+
+    public String getNomTresor() {
         return nomTresor;
     }
 
-    public boolean estDisponible() {
-        return dispo;
+    public ArrayList<Tresor> getLesTresors() {
+        return lesTresors;
     }
 
-    private void CreerTresor() {
-        Tresor tresor;
-        for (i = 0; i < 4; i++) {
-            tresor = new Tresor(nomTresor[i], true);
-        }
-
+    public void initTresor() {
+        
+        lesTresors = new ArrayList<>();
+        
+        Tresor t1 = new Tresor("Le Cristal ardent");
+        lesTresors.add(t1);
+        Tresor t2 = new Tresor("La Pierre sacrée");
+        lesTresors.add(t2);
+        Tresor t3 = new Tresor("La Statue du zéphyr");
+        lesTresors.add(t3);
+        Tresor t4 = new Tresor("Le Calice de l’onde");
+        lesTresors.add(t4);
     }
+
 }

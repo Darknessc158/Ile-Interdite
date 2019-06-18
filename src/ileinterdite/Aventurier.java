@@ -15,6 +15,8 @@ public class Aventurier {
 
     private int idtuile;
     Grille grille;
+    private String nomTuile;
+    public ArrayList<Tuile> TuilesAjdacentes;
     public ArrayList<Tuile> TuilesAssechables;
     public ArrayList<Tuile> TuilesDispos;
     private Pion CouleurPion;
@@ -80,31 +82,68 @@ public class Aventurier {
         return idtuile;
     }
 
+        public ArrayList<Tuile> getTuilesAdjacentes(int idtuile) {
+        ArrayList<Tuile> TuilesAdjacentes = new ArrayList<>();
+        int j = getPosition(grille, idtuile)[0];
+        int i = getPosition(grille, idtuile)[1];
+
+        if (j != 0) {        //On vérifie si la tuile du dessus existe
+            j = j - 1;        //On se place sur la tuile au dessus
+
+            if (grille.getGrilleDeTuiles()[i][j].getNomTuile() != "tuilenulle") {
+                TuilesAdjacentes.add(grille.getGrilleDeTuiles()[i][j]);
+            }
+        }
+        j = getPosition(grille, idtuile)[0];
+        if (j != 5) {        //On vérifie si la tuile du dessous existe
+            j = j + 1;        //On se place sur la tuile au dessous
+
+            if (grille.getGrilleDeTuiles()[i][j].getNomTuile() != "tuilenulle") {
+                TuilesAdjacentes.add(grille.getGrilleDeTuiles()[i][j]);
+            }
+        }
+        j = getPosition(grille, idtuile)[0];
+        if (i != 0) {
+            i = i - 1;//on se place sur la tuile de gauche
+            if (grille.getGrilleDeTuiles()[i][j].getNomTuile() != "tuilenulle") {
+                TuilesAdjacentes.add(grille.getGrilleDeTuiles()[i][j]);
+            }
+        }
+        i = getPosition(grille, idtuile)[1];
+        if (i != 5) {
+            i = i + 1;    //on se place sur la tuile de droite        
+            if (grille.getGrilleDeTuiles()[i][j].getNomTuile() != "tuilenulle") {
+                TuilesAdjacentes.add(grille.getGrilleDeTuiles()[i][j]);
+            }
+        }
+        return TuilesAdjacentes;
+    }
+    
     public ArrayList<Tuile> getTuilesAssechables() {
+        TuilesAssechables = getTuilesAdjacentes(idtuile);
+        for (Tuile tuile : this.getTuilesAssechables()) {
+            if (tuile.getEtat().equals(innondé)) {
+                TuilesAssechables.remove(tuile);
+            }
+        }
         return TuilesAssechables;
     }
 
-    public void setTuilesAssechables(ArrayList<Tuile> TuilesAssechables) {
-        this.TuilesAssechables = TuilesAssechables;
-    }
-
-    public ArrayList<Tuile> getTuilesDispo() {
-        return TuilesDispos;
-    }
-
-    public void setTuilesDispo(ArrayList<Tuile> TuilesDispo) {
-        this.TuilesDispos = TuilesDispo;
-    }
-
     public ArrayList<Tuile> getTuilesDispos() {
-        return TuilesDispos;
+            TuilesDispos = getTuilesAdjacentes(idtuile);
+        for (Tuile tuile : this.getTuilesDispos()) {
+            if (tuile.getEtat().equals(coulée)) {
+                TuilesDispos.remove(tuile);
+            }
+        }
+        return TuilesDispos;             
     }
-
-    public int[] getPosition(Grille grille, int idtuile) {
+    
+        public int[] getPosition(Grille grille, int idtuile) {
         int[] position = new int[2];
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
-                if (grille.getGrilleDeTuiles()[i][j].idtuile == idtuile) {
+                if (grille.getGrilleDeTuiles()[i][j].getIdtuile() == idtuile) {
                     position[0] = j;
                     position[1] = i;
                     break;
@@ -114,66 +153,15 @@ public class Aventurier {
         return position;
     }
 
-    public ArrayList<Tuile> TuilesAdjacentes(int idtuile) {
-        ArrayList<Tuile> TuilesAdjacentes = new ArrayList<>();
-        int j = getPosition(grille, idtuile)[0];
-        int i = getPosition(grille, idtuile)[1];
-
-        if (j != 0) {        //On vérifie si la tuile du dessus existe
-            j = j - 1;        //On se place sur la tuile au dessus
-
-            if (grille.getGrilleDeTuiles()[i][j].nomTuile != "tuilenulle") {
-                TuilesAdjacentes.add(grille.getGrilleDeTuiles()[i][j]);
-            }
-        }
-        j = getPosition(grille, idtuile)[0];
-        if (j != 5) {        //On vérifie si la tuile du dessous existe
-            j = j + 1;        //On se place sur la tuile au dessous
-
-            if (grille.getGrilleDeTuiles()[i][j].nomTuile != "tuilenulle") {
-                TuilesAdjacentes.add(grille.getGrilleDeTuiles()[i][j]);
-            }
-        }
-        j = getPosition(grille, idtuile)[0];
-        if (i != 0) {
-            i = i - 1;//on se place sur la tuile de gauche
-            if (grille.getGrilleDeTuiles()[i][j].nomTuile != "tuilenulle") {
-                TuilesAdjacentes.add(grille.getGrilleDeTuiles()[i][j]);
-            }
-        }
-        i = getPosition(grille, idtuile)[1];
-        if (i != 5) {
-            i = i + 1;    //on se place sur la tuile de droite        
-            if (grille.getGrilleDeTuiles()[i][j].nomTuile != "tuilenulle") {
-                TuilesAdjacentes.add(grille.getGrilleDeTuiles()[i][j]);
-            }
-        }
-        return TuilesAdjacentes;
+    public void setTuilesAssechables(ArrayList<Tuile> TuilesAssechables) {
+        this.TuilesAssechables = TuilesAssechables;
     }
 
-    public ArrayList<Tuile> TuilesAssechables(int idtuile) {
-        TuilesAssechables = TuilesAdjacentes(idtuile);
-        for (Tuile tuile : this.getTuilesAssechables()) {
-            if (tuile.getEtat().equals(innondé)) {
-                TuilesAssechables.remove(tuile);
-            }
-        }
-        return TuilesAssechables;
-    }
-
-    public ArrayList<Tuile> TuilesDispos(int idtuile) {
-        TuilesDispos = TuilesAdjacentes(idtuile);
-        for (Tuile tuile : this.getTuilesDispos()) {
-            if (tuile.getEtat().equals(coulée)) {
-                TuilesDispos.remove(tuile);
-            }
-        }
-        return TuilesDispos;
+    public void setTuilesDispo(ArrayList<Tuile> TuilesDispo) {
+        this.TuilesDispos = TuilesDispo;
     }
 
     public void deplacerAventurier(Aventurier aventurier) {
-        TuilesDispos = TuilesDispos(this.idtuile);
-        
         
     }
 

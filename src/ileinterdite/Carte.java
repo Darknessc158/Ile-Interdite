@@ -5,19 +5,24 @@
  */
 package ileinterdite;
 
-
-public abstract class Cartes {
-    
+/**
+ *
+ * @author amegliol
+ */
+public class Carte {
     
     private String nomCarte;
     
-    Cartes(String nomCarte){
-        this.nomCarte = nomCarte;
+    Carte(String nomCarte){
+        this.nomCarte = nomCarte;    
+    }
+
+    public String getNomCarte() {
+        return nomCarte;
     }
 
     public void setNomCarte(String nomCarte) {
         this.nomCarte = nomCarte;
     }
-    
-    
+
 }

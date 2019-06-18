@@ -5,12 +5,15 @@
  */
 package ileinterdite;
 
+import java.util.ArrayList;
+
 
 public class Joueur {
     String nomJoueur;
     private int nbCartes;
     private int actionsRestantes;
     private Aventurier aventurier;
+    private ArrayList<Carte> CarteJoueur;
 
     
     Joueur(String nomJoueur, int nbCartes,int actionsRestantes, Aventurier aventurier){

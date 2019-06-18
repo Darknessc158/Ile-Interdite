@@ -21,15 +21,43 @@ public class Controleur implements Observateur {
     private IHM ihm;
     private ArrayList<Aventurier> LesAventuriers = new ArrayList<>();
     private int actionRestantes;
+    
+    
+    
+    //LISTE DES TRESORS DISPONIBLE ET CEUX RECUPERES PAR L'EQUIPE
+        private Tresor tresor;
+        private ArrayList<Tresor> TresorsDisponibles;
+        private ArrayList<Tresor> TresorsRecuperes;
+    //PILE ET DEFAUSSE DES CARTES INONDATION (qui sont en fait des tuiles)
+        private ArrayList<Tuile> PileInondation;
+        private ArrayList<Tuile> DefausseInondation;
+    //PILE ET DEFAUSSE DES CARTES RECUPERABLES (carte tresor) -- Instancier pileREcuperable()
+        private PileRecuperable pileR;    //Création d'un objet de type PileRecuperable qui initialise la pile
+        private ArrayList<Carte> PileRecuperable;
+        private ArrayList<Carte> DefausseRecuperable;
 
     Controleur() {
         grille = new Grille();
         ihm = new IHM();
         ihm.addObservateur(this);
         //grille.afficherGrille();    // JUSTE POUR TESTER GRILLE 
+        grille.afficheGrille2();
         ihm.initialisationBoutons();
         ihm.appelleMap();
-        ihm.afficher();
+        ihm.afficher();     
+        
+    }
+
+    public void setNiveauEau(int niveauEau) {
+        this.niveauEau = niveauEau;
+    }
+
+    public ArrayList<Tuile> getPileInondation() {
+        return PileInondation;
+    }
+
+    public ArrayList<Tuile> getDefausseInondation() {
+        return DefausseInondation;
     }
 
     public Grille getGrille() {
@@ -39,10 +67,8 @@ public class Controleur implements Observateur {
     public ArrayList<Aventurier> getLesAventuriers() {
         return LesAventuriers;
     }
-    
 
-    public void InitAventurier() {
-        Tuile tuile;
+    public void initAventurier() {
         Aventurier Ingénieur = new Aventurier("Rouge", 0);
         LesAventuriers.add(Ingénieur);
 
@@ -63,47 +89,59 @@ public class Controleur implements Observateur {
 
         Collections.shuffle(LesAventuriers);
     }
-
-    public void CréerJoueurs() {
-        Scanner sc = new Scanner(System.in);
-        int nbjoueurs = 0;
-        Joueur joueur;
-
-        while (!(nbjoueurs < 5 && nbjoueurs > 1)) {
-            System.out.println("Nombre de joueurs ? (de 2 à 4 joueurs) : ");
-            nbjoueurs = sc.nextInt();
-
-            for (int i = 0; i < nbjoueurs; i++) {
-                System.out.print("/n Nom du joueur n°" + i + " : ");
-                String nomjoueur = sc.nextLine();
-
-                joueur = new Joueur(nomjoueur, 0, 0, getLesAventuriers().get(i));
-            }
-            System.out.println("Enregistrement des joueurs terminés !");
-        }
-
+    
+    
+    
+    public void initPileDefausseInondation(){
+        PileInondation = new ArrayList<>();
+        DefausseInondation = new ArrayList<>();
+        
+        PileInondation = grille.getLesTuiles();
     }
     
-    public void TourDeJeu(Joueur joueur){
-        this.actionRestantes = 4;
+    public void initPileDefausseRecuperable(){
+        pileR = new PileRecuperable();
+        PileRecuperable = pileR.getPileRecuperable();
+        DefausseRecuperable = new ArrayList<>();        
+            }
+    
+    public void initTresors(){
+        tresor = new Tresor();  //LE CONSTRUCTEUR DE TRESOR() FABRIQUE 4 OBJETS DE TYPE TRESOR(STRING NOMTRESOR)
+        TresorsDisponibles =  tresor.getLesTresors();   //ON RECUPERE LA LISTE DES 4 TRESORS
+        TresorsRecuperes = new ArrayList<>();   //AUCUN TRESOR N'A ETE RECUPERER POUR L'INSTANT
+    }
+    
+    public void RecupererTresor(Tresor tresor){
+        TresorsDisponibles.remove(tresor);
+        TresorsRecuperes.add(tresor);
+    }
         
-        while (actionRestantes > 0){
-            
+    public void MonteeDesEaux(){
+        setNiveauEau(niveauEau + 1);       //A MODIFIER SI UN PARAMETRE EST RENTRE (a verifier)
+        
+        //Gestion de Pile et Defausse Inondation
+        Collections.shuffle(DefausseInondation);
+        for (Tuile tuile : getDefausseInondation()){
+            getPileInondation().add(tuile);
+            getDefausseInondation().remove(tuile);
         }
+        
+        //IL FAUT AUSSI DEFAUSSER LA CARTE MONTEE DES EAUX DE LA PILE CARTE RECUPERABLES
         
     }
 
+    
     @Override
     public void traiterMessage(Message m) {
 
         switch (m.typeMessage) {
             case INITIALISATION_MAP:
                 this.ihm.initialisationMap(this.getGrille().getGrilleDeTuiles());
-                
+
                 break;
             case ASSECHER:
                 this.ihm.afficheAssechables(this.getGrille().getGrilleDeTuiles(), 5);
-                
+
                 //méthode pour afficher les cases asséchables
                 break;
             case DEPLACER:
@@ -121,6 +159,7 @@ public class Controleur implements Observateur {
     public static void main(String[] args) {
 
         Controleur appli = new Controleur();
+       appli.pileR.afficherPile();
 
     }
 

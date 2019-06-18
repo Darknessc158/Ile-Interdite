@@ -10,26 +10,29 @@ import java.util.ArrayList;
 
 public class Tuile {
 
-    public int idtuile;
-    public Etat etat;
-    public String nomTuile;
+    private int idtuile;
+    private String nomTuile;
+    private Etat etat;
+    private Event event;
 
-    Tuile(int idtuile, String nomTuile, Etat etat) {
+    Tuile(int idtuile, String nomTuile, Etat etat, Event event) {
         this.idtuile = idtuile;
         this.nomTuile = nomTuile;
         this.etat = etat;
+        this.event = event;
+    }
+    
+    public enum Event{
+        SPAWN_ROUGE, SPAWN_ORANGE, SPAWN_VIOLET, SPAWN_JAUNE, SPAWN_BLEU, SPAWN_VERT
+        ,TRESOR_PIERRE, TRESOR_ZEPHYR, TRESOR_CRISTAL, TRESOR_CALICE;
     }
 
     public enum Etat {
         assechée, innondé, coulée
-    };
+    }
 
     public int getIdtuile() {
         return idtuile;
-    }
-
-    public boolean isHeliport() {
-        return this.nomTuile.equalsIgnoreCase("Heliport");
     }
 
     public String getNomTuile() {
@@ -40,7 +43,12 @@ public class Tuile {
         return this.etat;
     }
 
-    //Constructeur--------------------------------------------------------
+    public Event getEvent() {
+        return event;
+    }
+    
+
+    //Setters--------------------------------------------------------
     public void setInnondée() {
         this.etat = innondé;
     }
@@ -52,9 +60,5 @@ public class Tuile {
     public void setCoulée() {
         this.etat = coulée;
     }
-
-//    private String[] nomTuilesTresor = {"Le temple de la lune", "Le temple du soleil", "Le jardin des murmures", "Le jardin des hurlements",
-//        "La caverne du brasier", "La caverne des ombres", "Le palais des marées", "Le palais de corail"};
-
 
 }

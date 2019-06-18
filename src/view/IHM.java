@@ -174,6 +174,7 @@ public class IHM extends Observe {
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
                 t = tuiles[i][j];
+
                 if (t.getNomTuile().equalsIgnoreCase("tuillenulle")) {
                     getGrillebouton()[i][j] = new JButton();
                     getGrillebouton()[i][j].setBackground(Color.cyan);
@@ -213,11 +214,11 @@ public class IHM extends Observe {
         Tuile t;
 
         ArrayList temp = new ArrayList<>();
-        temp = a.TuilesAssechables(idtuile);
+        temp = a.getTuilesAssechables();
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
                 t = tuiles[i][j];
-                if (temp.contains(t.idtuile)) {
+                if (temp.contains(t.getIdtuile())) {
                     grillebouton[i][j].setBackground(Color.LIGHT_GRAY);
                 } else {
                     grillebouton[i][j].setEnabled(false);
