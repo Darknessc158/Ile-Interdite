@@ -60,6 +60,14 @@ public class Controleur implements Observateur {
         return DefausseInondation;
     }
 
+    public ArrayList<Carte> getPileRecuperable() {
+        return PileRecuperable;
+    }
+
+    public ArrayList<Carte> getDefausseRecuperable() {
+        return DefausseRecuperable;
+    }
+    
     public Grille getGrille() {
         return grille;
     }
@@ -128,6 +136,15 @@ public class Controleur implements Observateur {
         
         //IL FAUT AUSSI DEFAUSSER LA CARTE MONTEE DES EAUX DE LA PILE CARTE RECUPERABLES
         
+    }
+    
+    public void piocherCartesTresor(Joueur joueur){
+        Carte carte;
+        for (int i=0; i<2; i++){        
+            carte = getPileRecuperable().get(i);
+            joueur.
+            
+        }
     }
 
     

@@ -9,28 +9,30 @@ import java.util.ArrayList;
 
 
 public class Joueur {
-    String nomJoueur;
-    private int nbCartes;
+    
+    private String nomJoueur;
     private int actionsRestantes;
     private Aventurier aventurier;
     private ArrayList<Carte> CarteJoueur;
 
     
-    Joueur(String nomJoueur, int nbCartes,int actionsRestantes, Aventurier aventurier){
+    Joueur(String nomJoueur,int actionsRestantes, Aventurier aventurier){
         this.nomJoueur = nomJoueur;
-        this.nbCartes = nbCartes;
         this.actionsRestantes = actionsRestantes;
         this.aventurier = aventurier;
+        CarteJoueur = new ArrayList<>();
     }
 
     public String getNomJoueur() {
         return nomJoueur;
     }
 
-    public int getNbCartes() {
-        return nbCartes;
+    public ArrayList<Carte> getCarteJoueur() {
+        return CarteJoueur;
     }
 
+    
+    
     public int getActionsRestantes() {
         return actionsRestantes;
     }
@@ -39,9 +41,6 @@ public class Joueur {
         this.nomJoueur = nomJoueur;
     }
 
-    public void setNbCartes(int nbCartes) {
-        this.nbCartes = nbCartes;
-    }
 
     public void setActionsRestantes(int actionsRestantes) {
         this.actionsRestantes = actionsRestantes;

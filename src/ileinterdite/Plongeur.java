@@ -16,6 +16,14 @@ public class Plongeur extends Aventurier {
     
     @Override
     public ArrayList<Tuile> getTuilesDispos() {
-        
+        TuilesDispos = getTuilesAdjacentes(idtuile);
+        ArrayList<Tuile> TuilesDisponibles = new ArrayList<>();
+        for (Tuile tuile : this.getTuilesDispos()) {
+            if (tuile.getEtat().equals(coulée)) {
+                //TuilesDispos.remove(tuile);
+                //TuilesDisponibles = get
+            }
+        }
+        return TuilesDispos;  
     }
 }

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class Aventurier {
 
-    private int idtuile;
+    int idtuile;
     Grille grille;
     private String nomTuile;
     public ArrayList<Tuile> TuilesAjdacentes;
